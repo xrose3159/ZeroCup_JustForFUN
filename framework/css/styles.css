@@ -86,7 +86,7 @@ html {
 }
 
 
-/* 图片自适应全宽 */
+/* 首页大图片自适应全宽 */
 
 .img-container1 {
     width: 100%;
@@ -107,4 +107,62 @@ html {
     font-size: 56px;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+/* 额外明确一下margin属性的用法：
+
+margin: auto;
+margin-top: auto;      明确上边距
+margin-right: auto;    明确右边距
+margin-bottom: 50px;   明确底部外边距为50px
+margin-left: auto;     明确左边距
+
+对于单独的一个margin
+后面的4个属性位分别为： top right bottom left
+
+*/
+
+/* 内容窗口 */
+.bordered-window-content {
+    width: 80%;
+    padding: 20px;
+    border: 2px solid #9aff9a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 10px;
+
+    margin: auto auto 50px auto;
+}
+
+/* 首页内容flex容器 */
+.content-container-flex {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+
+/* flex内容窗口 */
+.bordered-window-content-flex {
+    width: 60%;
+    padding: 20px;
+    border: 2px solid #9aff9a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 10px;
+
+}
+
+/* flex内容图片 */
+
+.img-container-flex {
+    width: 20%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.img-container-flex img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
