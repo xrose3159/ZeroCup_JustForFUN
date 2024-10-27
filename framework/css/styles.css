@@ -166,3 +166,153 @@ margin-left: auto;     明确左边距
     height: 100%;
     object-fit: cover;
 }
+
+
+
+/* 时间轴 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+nav {
+    width: 100%;
+    background-color: #4CAF50;
+    padding: 10px 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+h2 {
+    color: #4CAF50;
+    text-align: center;
+} 
+
+/* 内容框样式 */
+.bordered-window-content-flex {
+    width: 80%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-bottom: 20px;
+} 
+
+.timeline-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    justify-content: center;
+    transform: translateX(0); 
+    transition: transform 0.3s ease;
+} 
+
+/* 时间轴容器 */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    position: relative;
+    padding-top: 20px;
+    background-image: url('https://www.pngmart.com/files/21/2D-Tree-PNG-HD.png'); /* 使用树干图片 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+} 
+
+/* 垂直时间轴线 */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px; 
+    background-color: #4CAF50; 
+    transform: translateX(-50%);
+} 
+
+/* 时间点样式 */
+.timeline-event {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px 0;
+} 
+
+
+/* 年份样式 */
+ .timeline-event h4 {
+    margin: 20px 0 0; 
+    font-size: 18px;
+    color: #4CAF50;
+} 
+
+/* 圆圈标记 */
+ .timeline-event::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    transform: translateX(-50%);
+} 
+
+/* 右侧内容显示区域 */
+.content-display {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: none; 
+    text-align: left;
+    margin-left: 20px;
+} 
+
+.content-display h4 {
+    color: #4CAF50;
+    margin-top: 0;
+}
+
+.close-button {
+    cursor: pointer;
+    color: #4CAF50;
+    margin-top: 10px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: right;
+    display: block;
+}
+
