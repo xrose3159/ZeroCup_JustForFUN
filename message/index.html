@@ -1,8 +1,8 @@
 <!--
  * @Author: bddk
- * @Date: 2024-10-28 22:26:14
+ * @Date: 2024-10-28 23:24:37
  * @LastEditors: bddk
- * @LastEditTime: 2024-10-28 23:24:58
+ * @LastEditTime: 2024-10-28 23:30:14
 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -22,10 +22,57 @@
   </div>
 
   <h2>所有留言</h2>
-  <button onclick="getMessages()">刷新留言</button>
+  <button onclick="displayMessages()">刷新留言</button>
   
   <div id="messages">
-    <!-- 留言内容表格将被 JavaScript 插入到这里 -->
+    <!-- 留言内容将被 JavaScript 插入到这里 -->
   </div>
+
+  <script>
+    // 提交留言的事件处理函数
+    function handleSubmit() {
+      const content = document.getElementById('content').value;
+      if (content) {
+        uploadMessage(content);
+      } else {
+        alert('请填写留言内容');
+      }
+    }
+
+    // 从字典展示留言的函数
+    function displayMessages() {
+      getMessages().then((messagesDict) => {
+        const messagesContainer = document.getElementById('messages');
+        messagesContainer.innerHTML = ''; // 清空已有内容
+
+        // 创建表格
+        const table = document.createElement('table');
+        table.border = "1"; // 设置表格边框
+        table.style.width = "100%";
+        table.style.textAlign = "left";
+
+        // 创建表头
+        const headerRow = document.createElement('tr');
+        const contentHeader = document.createElement('th');
+        contentHeader.innerText = "留言内容";
+        headerRow.appendChild(contentHeader);
+        table.appendChild(headerRow);
+
+        // 遍历字典中的留言并填充表格
+        for (const id in messagesDict) {
+          const content = messagesDict[id];
+
+          const row = document.createElement('tr');
+          const contentCell = document.createElement('td');
+          contentCell.innerText = content;
+
+          row.appendChild(contentCell);
+          table.appendChild(row);
+        }
+
+        messagesContainer.appendChild(table); // 将表格添加到容器
+      });
+    }
+  </script>
 </body>
 </html>
