@@ -1,0 +1,264 @@
+:root {
+    --left-bg-color: rgba(245, 252, 247, 0.7);
+    --middle-bg-color: rgba(200, 200, 200, 0.8);
+    --right-bg-color: rgba(19, 168, 76, 0.8);
+    --left-width: 40%;       /* 左列占屏幕40% */
+    --middle-width: 20%;     /* 中间列占屏幕20% */
+    --right-width: 40%;      /* 右列占屏幕40% */
+    --hover-width: 60%;      /* 悬停时放大的宽度 */
+    --shrink-width: 20%;     /* 另一列缩小的宽度 */
+    --speed: 1000ms;
+}
+  
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+  /* 顶部导航栏样式 */
+  nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(0, 77, 0, 0.8);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+  }
+  
+  /* LOGO样式 */
+  .nav-logo {
+      width: 80px;           /* 圆形图片的宽度 */
+      height: 80px;          /* 圆形图片的高度 */
+      border-radius: 50%;    /* 使图片成为圆形 */
+      object-fit: cover;     /* 确保图片内容按比例裁剪，适应圆形 */
+      position: absolute;    /* 使图片脱离文档流 */
+      left: 2%;           /* 图片超出导航栏的左边部分 */
+      top: 120%;              /* 垂直居中 */
+      transform: translateY(-50%);  /* 调整使其真正垂直居中 */
+      z-index: 1001;         /* 确保图片在导航栏之上 */
+  }
+  
+  nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin-left: 8%;
+  }
+  
+  nav ul li a {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 15px 20px;
+  }
+  
+  nav ul li a.active{
+      background-color: rgb(0, 73, 0); /* 设置加深的背景颜色 */
+      color: white;  /* 保持文字颜色 */
+  }
+  
+  nav ul li a:hover {
+      background-color: rgb(0, 38, 0);
+  }
+  
+  
+  
+  .container {
+    display: flex;
+    height: 100vh;
+}
+
+.split {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: width var(--speed) ease-in-out;
+}
+
+/* 左、中、右三列的初始宽度 */
+.split.left {
+    background-color: var(--left-bg-color);
+    width: var(--left-width); 
+    left: 0;
+    /* background-image: url('./Static/ecology1.png');  */
+}
+
+.split.middle {
+    background-color: var(--middle-bg-color);
+    width: var(--middle-width);
+    border-right: 1px solid rgba(0, 0, 0, 0.1); /* 添加柔和分隔线 */
+    padding-right: 10px;
+}
+
+.split.right {
+    background-color: var(--right-bg-color);
+    width: var(--right-width);
+}
+
+/* 悬停放大效果 */
+.container:hover .left:hover {
+    width: var(--hover-width);
+}
+
+.container:hover .right:hover {
+    width: var(--hover-width);
+}
+
+.container:hover .left:hover ~ .right,
+.container:hover .right:hover ~ .left {
+    width: var(--shrink-width);
+}
+
+.split h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 左侧内容框样式 */
+.text-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* 时间轴容器 */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    overflow-y: auto;
+    height: 90%;
+    position: relative;
+    width: 80%;
+}
+
+/* 垂直时间轴的线条 */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: #4CAF50;
+    transform: translateX(-50%);
+}
+
+
+/* 时间点样式 */
+.timeline-event {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: default;
+    margin: 20px 0;
+}
+
+.timeline-event h4 {
+    font-size: 1rem;
+    color: #4CAF50;
+    margin-top: 20px; /* 增加顶部间距，使年份和事件描述位于圆圈下方 */
+    padding: 0;
+}
+
+/* 时间点的圆圈标记 */
+.timeline-event::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    top: 0; /* 圆圈放在时间轴的中心位置 */
+}
+
+/* 事件描述区样式 */
+.content-display {
+    width: 90%;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    color: #333;
+    text-align: left;
+    overflow-y: auto;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+    transition: all 0.3s ease;
+}
+
+
+
+/* 默认卡片样式 */
+.event-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #4CAF50;
+    width: 100%; /* 卡片默认全宽 */
+    max-width: 300px;
+    transition: all 0.3s ease;
+    transform: scale(0.8); /* 初始缩小 */
+    opacity: 0.7; /* 初始半透明 */
+}
+
+/* 放大后的卡片样式 */
+.event-card.active {
+    transform: scale(1.2); /* 控制缩放比例 */
+    opacity: 1; /* 设置完全不透明 */
+    width: 90%; /* 设置放大时的宽度 */
+    height: 150px; /* 控制放大时的高度，让其更短 */
+    z-index: 10; /* 确保选中的卡片在最前 */
+    max-width: none;
+    border-radius: 10px; /* 增加圆角，使视觉效果更加突出 */
+}
+
+
+/* 缩小并保持在第三列中间的样式 */
+.event-card.inactive {
+    transform: scale(0.8); /* 缩小比例 */
+    opacity: 0.5; /* 提高透明度 */
+    margin: 5px auto; /* 垂直居中 */
+    align-self: center; /* 保持在第三列的中间位置 */
+}
+
+
+/* 高亮效果的基本样式 */
+.timeline-event:hover,
+.timeline-event.active {
+    background-color: rgba(76, 175, 80, 0.2); /* 时间轴事件背景变亮 */
+    border-radius: 4px;
+}
+
+.content-display p.highlight {
+    background-color: rgba(76, 175, 80, 0.2); /* 高亮对应事件的背景 */
+    padding: 10px;
+    border-radius: 4px;
+}
