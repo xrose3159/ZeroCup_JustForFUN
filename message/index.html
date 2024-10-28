@@ -1,0 +1,31 @@
+<!--
+ * @Author: bddk
+ * @Date: 2024-10-28 22:26:14
+ * @LastEditors: bddk
+ * @LastEditTime: 2024-10-28 23:24:58
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>留言区</title>
+  <script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+  <script src="config.js"></script>
+  <script src="message.js"></script>
+</head>
+<body>
+  <h1>留言区</h1>
+
+  <div>
+    <input type="text" id="content" placeholder="你的留言">
+    <button onclick="handleSubmit()">提交留言</button>
+  </div>
+
+  <h2>所有留言</h2>
+  <button onclick="getMessages()">刷新留言</button>
+  
+  <div id="messages">
+    <!-- 留言内容表格将被 JavaScript 插入到这里 -->
+  </div>
+</body>
+</html>
