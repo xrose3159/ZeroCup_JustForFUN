@@ -1,4 +1,12 @@
 /* 全局样式 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -10,26 +18,47 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #004d00;
+    background-color: rgba(0, 77, 0, 0.8);
     z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+/* LOGO样式 */
+.nav-logo {
+    width: 80px;           /* 圆形图片的宽度 */
+    height: 80px;          /* 圆形图片的高度 */
+    border-radius: 50%;    /* 使图片成为圆形 */
+    object-fit: cover;     /* 确保图片内容按比例裁剪，适应圆形 */
+    position: absolute;    /* 使图片脱离文档流 */
+    left: 2%;           /* 图片超出导航栏的左边部分 */
+    top: 120%;              /* 垂直居中 */
+    transform: translateY(-50%);  /* 调整使其真正垂直居中 */
+    z-index: 1001;         /* 确保图片在导航栏之上 */
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    padding: 15px 0;
-    margin: 0;
-}
-
-nav ul li {
-    margin: 0 20px;
+    margin-left: 8%;
 }
 
 nav ul li a {
+    display: inline-block;
     color: white;
     text-decoration: none;
     font-size: 18px;
+    padding: 15px 20px;
+}
+
+nav ul li a.active{
+    background-color: rgb(0, 73, 0); /* 设置加深的背景颜色 */
+    color: white;  /* 保持文字颜色 */
+}
+
+nav ul li a:hover {
+    background-color: rgb(0, 38, 0);
 }
 
 /* 内容区域样式 */
@@ -55,3 +84,201 @@ nav ul li a {
 html {
     scroll-behavior: smooth;
 }
+
+
+/* 首页大图片自适应全宽 */
+
+.img-container1 {
+    width: 100%;
+    height: 540px;
+    overflow: hidden;
+    margin-top: 54px;
+}
+
+.img-container1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 大标题 */
+.centered-title {
+    text-align: center;
+    font-size: 56px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* 额外明确一下margin属性的用法：
+
+margin: auto;
+margin-top: auto;      明确上边距
+margin-right: auto;    明确右边距
+margin-bottom: 50px;   明确底部外边距为50px
+margin-left: auto;     明确左边距
+
+对于单独的一个margin
+后面的4个属性位分别为： top right bottom left
+
+*/
+
+/* 内容窗口 */
+.bordered-window-content {
+    width: 80%;
+    padding: 20px;
+    border: 2px solid #9aff9a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 10px;
+
+    margin: auto auto 50px auto;
+}
+
+/* 首页内容flex容器 */
+.content-container-flex {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+
+/* flex内容窗口 */
+.bordered-window-content-flex {
+    width: 60%;
+    padding: 20px;
+    border: 2px solid #9aff9a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 10px;
+
+}
+
+/* flex内容图片 */
+
+.img-container-flex {
+    width: 20%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.img-container-flex img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+/* 时间轴 */
+h2 {
+    color: #4CAF50;
+    text-align: center;
+} 
+
+/* 内容框样式 */
+.bordered-window-content-flex {
+    width: 80%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-bottom: 20px;
+} 
+
+.timeline-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    justify-content: center;
+    transform: translateX(0); 
+    transition: transform 0.3s ease;
+} 
+
+/* 时间轴容器 */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    position: relative;
+    padding-top: 20px;
+    background-image: url('https://www.pngmart.com/files/21/2D-Tree-PNG-HD.png'); /* 使用树干图片 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+} 
+
+/* 垂直时间轴线 */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px; 
+    background-color: #4CAF50; 
+    transform: translateX(-50%);
+} 
+
+/* 时间点样式 */
+.timeline-event {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px 0;
+} 
+
+
+/* 年份样式 */
+ .timeline-event h4 {
+    margin: 20px 0 0; 
+    font-size: 18px;
+    color: #4CAF50;
+} 
+
+/* 圆圈标记 */
+ .timeline-event::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    transform: translateX(-50%);
+} 
+
+/* 右侧内容显示区域 */
+.content-display {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: none; 
+    text-align: left;
+    margin-left: 20px;
+} 
+
+.content-display h4 {
+    color: #4CAF50;
+    margin-top: 0;
+}
+
+.close-button {
+    cursor: pointer;
+    color: #4CAF50;
+    margin-top: 10px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: right;
+    display: block;
+}
+
