@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>环保项目</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<nav>
+    <img src="../Static/Logo.png" alt="Logo" class="nav-logo">
+    <ul>
+        <li><a href="home.html">首页</a></li>
+        <li><a href="eco-construction.html">生态文明建设</a></li>
+        <li><a href="eco-project.html" class="active">环保项目</a></li>
+        <li><a href="art-relative.html">相关文章引用</a></li>
+    </ul>
+</nav>
+
+
+<div class="project-container">
+    <div class="project-window" id="world-harmony">
+        <div class="app">
+            <div class="dynamic-text">
+                <span class="default-text">&nbsp;世界大同&nbsp;</span>
+                <span class="hover-text">&nbsp;世界大同&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="project-cards" id="projectCards1">
+            <!-- 动态卡片将在此添加 -->
+        </div>
+    </div>
+    <div class="project-window" id="pollution-introduction">
+        <div class="app">
+            <div class="dynamic-text">
+                <span class="default-text">&nbsp;隐入尘烟&nbsp;</span>
+                <span class="hover-text">&nbsp;隐入尘烟&nbsp;</span>
+            </div>
+        </div>
+        <div class="project-cards" id="projectCards2">
+            <!-- 动态卡片将在此添加 -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // 项目数据
+    const projects1 = [
+        { name: "绿色和平组织", description: "致力于全球环保、减少污染。", link: "https://www.baidu.com/s?tn=15007414_15_dg&ie=utf-8&wd=%E7%99%BE%E5%BA%A6" },
+        { name: "世界自然基金会", description: "保护濒危物种及其栖息地，倡导可持续发展。", link: "https://zh.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E8%87%AA%E7%84%B6%E5%9F%BA%E9%87%91%E4%BC%9A" }
+    ];
+
+    const projects2 = [
+        { name: "地球之友", description: "致力于生态保护。", link: "https://zh.wikipedia.org/wiki/%E5%9C%B0%E7%90%83%E4%B9%8B%E5%8F%8B" },
+        { name: "野生动物保护协会", description: "保护全球野生动物及其栖息地。", link: "https://zh.wikipedia.org/wiki/%E9%87%8E%E7%94%9F%E5%8A%A8%E7%89%A9%E4%BF%9D%E6%8A%A4%E5%8D%8F%E4%BC%9A" }
+    ];
+
+    // 创建卡片的通用函数
+function addCard(container, project) {
+    const newCard = document.createElement('div');
+    newCard.className = 'project-card';
+    newCard.innerHTML = `<a href="${project.link}" target="_blank">${project.name}</a> - ${project.description}`;
+    container.appendChild(newCard);
+}
+
+// #projectCards1 独立监听
+let projectIndex1 = 0;
+let cardCount1 = 0; // 卡片计数器
+const maxCards = 30; // 最大卡片数量
+let allowAddCards1 = true; // 控制是否允许添加卡片的开关
+
+document.getElementById('world-harmony').addEventListener('mousemove', () => {
+    if (allowAddCards1 && cardCount1 < maxCards) {
+        const projectCards1 = document.getElementById('projectCards1');
+        addCard(projectCards1, projects1[projectIndex1]);
+        projectIndex1 = (projectIndex1 + 1) % projects1.length; // 循环显示项目
+        cardCount1++;
+    }
+});
+
+// 检查是否滚动到页面底部的函数
+function checkScrollToBottom(container, callback) {
+    if (container.scrollHeight - container.scrollTop === container.clientHeight) {
+        callback();
+    }
+}
+
+// 监听 #projectCards1 滚动事件，滚动到底部后允许生成更多卡片
+document.getElementById('projectCards1').addEventListener('scroll', () => {
+    checkScrollToBottom(document.getElementById('projectCards1'), () => {
+        allowAddCards1 = true;
+        cardCount1 = 0; // 重置计数器，以便继续生成卡片
+    });
+});
+
+/*------------------------------------------------------------------------------------------*/
+
+// #projectCards2 独立监听
+let projectIndex2 = 0;
+let cardCount2 = 0; // 卡片计数器
+let allowAddCards2 = true; // 控制是否允许添加卡片的开关
+
+document.getElementById('pollution-introduction').addEventListener('mousemove', () => {
+    if (allowAddCards2 && cardCount2 < maxCards) {
+        const projectCards2 = document.getElementById('projectCards2');
+        addCard(projectCards2, projects2[projectIndex2]);
+        projectIndex2 = (projectIndex2 + 1) % projects2.length; // 循环显示项目
+        cardCount2++;
+    }
+});
+
+// 监听 #projectCards2 滚动事件，滚动到底部后允许生成更多卡片
+document.getElementById('projectCards2').addEventListener('scroll', () => {
+    checkScrollToBottom(document.getElementById('projectCards2'), () => {
+        allowAddCards2 = true;
+        cardCount2 = 0; // 重置计数器，以便继续生成卡片
+    });
+});
+</script>
+
+</body>
+</html>
