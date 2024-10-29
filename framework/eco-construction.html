@@ -4,118 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生态文明建设</title>
-    <link rel="stylesheet" href="css/styles-eco-construction.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <!-- 顶部导航栏 -->
-    <nav>
-        <img src="../Static/Logo.png" alt="Logo" class="nav-logo">
-        <ul>
-            <li><a href="home.html">首页</a></li>
-            <li><a href="eco-construction.html" class="active">生态文明建设</a></li>
-            <li><a href="eco-project.html">环保项目</a></li>
-            <li><a href="art-relative.html">相关文章引用</a></li>
-        </ul>
-    </nav>
+<!-- 顶部导航栏 -->
+<nav>
+    <img src="../Static/Logo.png" alt="Logo" class="nav-logo">
+    <ul>
+        <li><a href="home.html">首页</a></li>
+        <li><a href="eco-construction.html" class="active">生态文明建设</a></li>
+        <li><a href="eco-project.html">环保项目</a></li>
+        <li><a href="art-relative.html">相关文章引用</a></li>
+    </ul>
+</nav>
 
-    <!-- 三列布局容器 -->
-    <div class="container">
-        <!-- 第一列：左侧内容框 -->
-        <div class="split left">
-            <h1>什么是可持续发展?</h1>
-            <div class="text-box">
-                <p>
-                    目前世界对“可持续发展”的公认概念，其定义源于1987年世界环境与发展委员会提出，并于联合国第四十二届大会公布的报告——《我们共同的未来》：可持续发展是既满足当代人的需要，又不损害后代人满足其需要的能力的发展。
-                    它包含两个关键概念：资源永续广义的定义1、在提升和创造当代的同时，不能以降低福祉为代价；2、以善用所有生态体系的自然资源为原则，不可降低其环境基本存量，在利用生物与生态体系时。
-                </p>
-            </div>
+<!-- <div class="img-container1">
+    <img src="../Static/ecology1.png" alt="标题图片" >
+</div> -->
+
+<div class="bordered-window-content-flex" style="width: 80%; max-width: 800px; background-color: #ffffff; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; margin: 80px auto;">
+    <h2 >什么是可持续发展?</h2>
+    <p>
+        目前世界对“可持续发展”的公认概念，其定义源于1987年世界环境与发展委员会提出，并于联合国第四十二届大会公布的报告——《我们共同的未来》：可持续发展是既满足当代人的需要，又不损害后代人满足其需要的能力的发展。
+        它包含两个关键概念：资源永续广义的定义1、在提升和创造当代的同时，不能以降低福祉为代价；2、以善用所有生态体系的自然资源为原则，不可降低其环境基本存量，在利用生物与生态体系时。
+        长期单纯追求经济增长的发展模式导致环境的破坏，各种环境危机浮现，人们认识到经济发展受环境承载力制约。
+        可持续发展源于1980年代的“绿色运动”，由于1960年代发达国家在非洲及南美洲大量收购农地种植咖啡和甘蔗，并用所得的金钱购买粮食，以供应给当地居民。
+        然而，由于土地发展过度，且缺乏规划，令咖啡和糖的期货在短时间内贬值。南美各国经济顿时崩溃，加上水土流失、滥用农药及过度消费行为持续扩大，令土地贫瘠，甚至沙漠化，引致饥荒。
+        * “需要”的概念，特别是世界上穷人的基本需要，应给予最优先的重视；以及技术和社会组织的状态对环境满足当前和未来需要的能力所施加的限制。
+    </p>
+</div>
+
+
+<h2>可持续发展历史大事年表</h2>
+
+<!-- 时间轴和内容显示区域 -->
+<div class="timeline-wrapper" id="timelineWrapper">
+    <div class="timeline-container">
+        <div class="timeline-event" onclick="showEvent('1972', '联合国人类环境会议，推动环境保护议题全球化。')">
+            <h4>1972</h4>
         </div>
-
-        <!-- 第二列：时间轴 -->
-        <div class="split middle">
-            <div class="timeline-container">
-                <div class="timeline-event">
-                    <h4>1972 - 联合国人类环境会议</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>1987 - 《我们共同的未来》报告</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>1992 - 里约地球峰会</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>1997 - 签署《京都议定书》</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>2000 - 千年发展目标(MDGs)设立</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>2012 - 里约+20峰会</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>2015 - 可持续发展目标(SDGs)</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>2016 - 《巴黎协定》生效</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>2019 - 全球气候抗议活动</h4>
-                </div>
-                <div class="timeline-event">
-                    <h4>2021 - 《气候变化巴黎协定》升级</h4>
-                </div>
-            </div>
+        <div class="timeline-event" onclick="showEvent('1987', '《我们共同的未来》报告，提出可持续发展的概念。')">
+            <h4>1987</h4>
         </div>
-
-        <!-- 第三列：事件描述 -->
-        <div class="split right">
-            <h1>可持续发展历史事件</h1>
-            <div class="content-display">
-                <div class="event-card">
-                    <h4>1972 - 联合国人类环境会议</h4>
-                    <p>推动环境保护议题全球化。该会议是联合国首次在全球范围内提出环境保护的议题，奠定了现代环境保护运动的基础，强调了人类对环境的责任。</p>
-                </div>
-                <div class="event-card">
-                    <h4>1987 - 《我们共同的未来》报告</h4>
-                    <p>该报告首次提出“可持续发展”的概念，定义为既满足当代人需求，又不损害后代人满足需求的能力。这一理念为全球环境政策的制定提供了指导。</p>
-                </div>
-                <div class="event-card">
-                    <h4>1992 - 里约地球峰会</h4>
-                    <p>《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。《21世纪议程》在该会议上发布，提出了经济增长、社会公平与环境保护相结合的发展目标，为全球可持续发展设定了指导方针。</p>
-                </div>
-                <div class="event-card">
-                    <h4>1997 - 签署《京都议定书》</h4>
-                    <p>《启动全球减排合作</p>
-                </div>
-                <div class="event-card">
-                    <h4>2000 - 千年发展目标(MDGs)设立</h4>
-                    <p> 重点消除贫困。</p>
-                </div>                    
-                <div class="event-card">
-                    <h4>2012 - 里约+20峰会</h4>
-                    <p>强调绿色经济和可持续发展。</p>
-                </div>
-                <div class="event-card">
-                    <h4>2015 - 可持续发展目标</h4>
-                    <p>可持续发展目标(SDGs)设立，设立17项全球目标。</p>
-                </div>
-                <div class="event-card">
-                    <h4>2016 - 《巴黎协定》生效</h4>
-                    <p>进一步推动气候变化应对。</p>
-                </div>
-                <div class="event-card">
-                    <h4>2019 - 全球气候抗议活动</h4>
-                    <p>引发对气候行动的关注。</p>
-                </div>
-                <div class="event-card">
-                    <h4>2021 - 《气候变化巴黎协定》升级</h4>
-                    <p>《气候变化巴黎协定》升级，强化国家承诺。</p>
-                </div>
-                
-            </div>
+        <div class="timeline-event" onclick="showEvent('1992', '里约地球峰会，《21世纪议程》发布。')">
+            <h4>1992</h4>
+        </div>
+        <div class="timeline-event" onclick="showEvent('1997', '签署《京都议定书》，启动全球减排合作。')">
+            <h4>1997</h4>
+        </div>
+        <div class="timeline-event" onclick="showEvent('2000', '千年发展目标(MDGs)设立，重点消除贫困。')">
+            <h4>2000</h4>
+        </div>
+        <div class="timeline-event" onclick="showEvent('2012', '里约+20峰会，强调绿色经济和可持续发展。')">
+            <h4>2012</h4>
+        </div>
+        <div class="timeline-event" onclick="showEvent('2015', '可持续发展目标(SDGs)设立，设立17项全球目标。')">
+            <h4>2015</h4>
+        </div>
+        <div class="timeline-event" onclick="showEvent('2016', '《巴黎协定》生效，进一步推动气候变化应对。')">
+            <h4>2016</h4>
+        </div>
+        <div class="timeline-event" onclick="showEvent('2019', '全球气候抗议活动，引发对气候行动的关注。')">
+            <h4>2019</h4>
+        </div>
+        <div class="timeline-event" onclick="showEvent('2021', '《气候变化巴黎协定》升级，强化国家承诺。')">
+            <h4>2021</h4>
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- 右侧内容显示区域 -->
+    <div class="content-display" id="contentDisplay">
+        <h4 id="eventYear"></h4>
+        <p id="eventDescription"></p>
+        <span class="close-button" onclick="closeEvent()">关闭</span>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+    function showEvent(year, description) {
+        // 显示右侧内容
+        document.getElementById('eventYear').innerText = year;
+        document.getElementById('eventDescription').innerText = description;
+        document.getElementById('contentDisplay').style.display = 'block';
+
+        // 左移时间轴
+        document.getElementById('timelineWrapper').style.transform = 'translateX(-15%)';
+    }
+
+    function closeEvent() {
+        // 隐藏右侧内容
+        document.getElementById('contentDisplay').style.display = 'none';
+
+        // 复位时间轴
+        document.getElementById('timelineWrapper').style.transform = 'translateX(0)';
+    }
+</script>
+
+
 </body>
 </html>
