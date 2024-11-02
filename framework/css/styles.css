@@ -405,3 +405,35 @@ h2 {
 }
 
 /* 第三页截至*/
+
+.references {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.references h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.reference-list {
+    list-style: none;
+    padding: 0;
+}
+
+.reference-item {
+    margin-bottom: 10px;
+}
+
+.reference-item a {
+    text-decoration: none;
+    color: #0073e6;
+    font-size: 18px;
+}
+
+.reference-item a:hover {
+    text-decoration: underline;
+}
