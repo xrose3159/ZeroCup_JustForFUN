@@ -310,8 +310,33 @@ h2 {
     margin: 10px 0; /* 卡片的上下间距设置为10px，确保卡片之间有一定的间隔 */
     padding: 100px; /* 卡片内部填充空间，增加内容的可读性和美观性 */
     border: 1px solid #e6e6e6; /* 设置卡片的边框，颜色较浅，增强层次感 */
-    /* ... 其他样式继续定义 */
+    border-radius: 20px; /* 设置窗口的圆角效果 */
+    background-size: cover; /* 背景图片覆盖整个卡片 */
+    background-position: center; /* 背景图片居中显示 */
+    /*color: white; /* 文字颜色设置为白色，以便在背景图片上清晰显示 */
+    /*text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 文字阴影，增强可读性 */
+    position: relative; /* 为遮罩层提供定位上下文 */
 }
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色遮罩层 */
+    z-index: 1; /* 确保遮罩层在文字下方 */
+}
+
+.project-card a,
+.project-card .description {
+    position: relative; /* 确保文字在遮罩层上方 */
+    z-index: 2; /* 确保文字在遮罩层上方 */
+    color: rgb(255, 255, 255); /* 文字颜色设置为白色 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 文字阴影，增强可读性 */
+}
+
 
 /*鼠标移动特效*/
 .app {
