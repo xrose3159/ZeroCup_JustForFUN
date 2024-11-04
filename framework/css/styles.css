@@ -46,19 +46,77 @@ nav ul {
 
 nav ul li a {
     display: inline-block;
+    position: relative; /* 设置相对定位 */
     color: white;
     text-decoration: none;
     font-size: 18px;
     padding: 15px 20px;
+    transition: transform 0.3s ease; /* 平滑过渡效果 */
+    border-radius: 3px; /* 添加圆角 */
+}
+
+nav ul li a span {
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* 文字变换和透明度的平滑过渡 */
 }
 
 nav ul li a.active{
-    background-color: rgb(0, 73, 0); /* 设置加深的背景颜色 */
+    background-color: rgb(0, 100, 0); /* 设置加深的背景颜色 */
     color: white;  /* 保持文字颜色 */
 }
 
 nav ul li a:hover {
     background-color: rgb(0, 38, 0);
+    transform: scale(0.9); /* 悬停时缩小文字 */
+}
+
+nav ul li a::before {
+    content: attr(data-hover-text); /* 设置新文字内容 */
+    position: absolute;
+    bottom: -20px; /* 设置偏移，初始在隐藏状态 */
+    left: 0;
+    width: 100%;
+    text-align: center; /* 文字居中 */
+    font-size: 14px; /* 新文字的大小 */
+    color: #FFF; /* 新文字的颜色 */
+    opacity: 0; /* 初始透明度 */
+    transition: bottom 0.3s ease, opacity 0.3s ease;
+}
+
+nav ul li a:hover span {
+    transform: translateY(-10px); /* 缩小并上移文字 */
+    opacity: 0.7; /* 可选：降低透明度增加效果 */
+}
+
+
+nav ul li a:hover::before {
+    bottom: 4px; /* 新文字上移显示 */
+    opacity: 1; /* 新文字完全不透明 */
+}
+
+nav ul li a::after {
+    content: ''; /* 伪元素内容为空 */
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* 从中间开始 */
+    width: 0; /* 初始宽度为 0 */
+    height: 3px; /* 设置条形高度 */
+    background-color: #c8e1ff; /* 设置条形颜色 */
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+}
+
+nav ul li a:hover::after {
+    width: 100%; /* 悬停时宽度变为 100% */
+    left: 0; /* 从左边开始扩展 */
+}
+
+nav ul li a.active, nav ul li a:hover {
+    background-color: rgb(0, 38, 0);
+}
+
+nav ul li a.active::after {
+    width: 100%; /* 激活状态下也显示完整的条形 */
+    left: 0; /* 从左边开始 */
 }
 
 /* 内容区域样式 */
@@ -350,7 +408,7 @@ h2 {
 }
 
 .dynamic-text {
-    width: 180px; /* 设置宽度为40%，以适应父容器 */
+    width: 11rem; /* 设置宽度为40%，以适应父容器 */
     height: 40px; /* 适当调整高度，留出空间以显示动态文本 */
     position: relative; /* 相对定位，用于子元素的绝对定位 */
     display: flex; /* 使用flex布局，以便于对齐内容 */

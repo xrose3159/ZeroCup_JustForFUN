@@ -1,0 +1,260 @@
+/* 全局样式 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+/* 顶部导航栏样式 */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 77, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+/* LOGO样式 */
+.nav-logo {
+    width: 80px;           /* 圆形图片的宽度 */
+    height: 80px;          /* 圆形图片的高度 */
+    border-radius: 50%;    /* 使图片成为圆形 */
+    object-fit: cover;     /* 确保图片内容按比例裁剪，适应圆形 */
+    position: absolute;    /* 使图片脱离文档流 */
+    left: 2%;           /* 图片超出导航栏的左边部分 */
+    top: 120%;              /* 垂直居中 */
+    transform: translateY(-50%);  /* 调整使其真正垂直居中 */
+    z-index: 1001;         /* 确保图片在导航栏之上 */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-left: 8%;
+}
+
+nav ul li a {
+    display: inline-block;
+    position: relative; /* 设置相对定位 */
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 15px 20px;
+    transition: transform 0.3s ease; /* 平滑过渡效果 */
+    border-radius: 3px; /* 添加圆角 */
+}
+
+nav ul li a span {
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* 文字变换和透明度的平滑过渡 */
+}
+
+nav ul li a.active{
+    background-color: rgb(0, 100, 0); /* 设置加深的背景颜色 */
+    color: white;  /* 保持文字颜色 */
+}
+
+nav ul li a:hover {
+    background-color: rgb(0, 38, 0);
+    transform: scale(0.9); /* 悬停时缩小文字 */
+}
+
+nav ul li a::before {
+    content: attr(data-hover-text); /* 设置新文字内容 */
+    position: absolute;
+    bottom: -20px; /* 设置偏移，初始在隐藏状态 */
+    left: 0;
+    width: 100%;
+    text-align: center; /* 文字居中 */
+    font-size: 14px; /* 新文字的大小 */
+    color: #FFF; /* 新文字的颜色 */
+    opacity: 0; /* 初始透明度 */
+    transition: bottom 0.3s ease, opacity 0.3s ease;
+}
+
+nav ul li a:hover span {
+    transform: translateY(-10px); /* 缩小并上移文字 */
+    opacity: 0.7; /* 可选：降低透明度增加效果 */
+}
+
+
+nav ul li a:hover::before {
+    bottom: 4px; /* 新文字上移显示 */
+    opacity: 1; /* 新文字完全不透明 */
+}
+
+nav ul li a::after {
+    content: ''; /* 伪元素内容为空 */
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* 从中间开始 */
+    width: 0; /* 初始宽度为 0 */
+    height: 3px; /* 设置条形高度 */
+    background-color: #c8e1ff; /* 设置条形颜色 */
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+}
+
+nav ul li a:hover::after {
+    width: 100%; /* 悬停时宽度变为 100% */
+    left: 0; /* 从左边开始扩展 */
+}
+
+nav ul li a.active, nav ul li a:hover {
+    background-color: rgb(0, 38, 0);
+}
+
+nav ul li a.active::after {
+    width: 100%; /* 激活状态下也显示完整的条形 */
+    left: 0; /* 从左边开始 */
+}
+
+/* 内容区域样式 */
+.content-section {
+    padding: 100px 20px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+#section1 {
+    background-color: #e0ffe0;
+}
+
+#section2 {
+    background-color: #cce0ff;
+}
+
+#section3 {
+    background-color: #ffe0e0;
+}
+
+/* 使滚动平滑 */
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* 首页大图片自适应全宽 */
+
+.img-container1 {
+    width: 100%;
+    height: 540px;
+    overflow: hidden;
+    margin-top: 54px;
+}
+
+.img-container1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 大标题 */
+.centered-title {
+    text-align: center;
+    font-size: 56px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* 额外明确一下margin属性的用法：
+
+margin: auto;
+margin-top: auto;      明确上边距
+margin-right: auto;    明确右边距
+margin-bottom: 50px;   明确底部外边距为50px
+margin-left: auto;     明确左边距
+
+对于单独的一个margin
+后面的4个属性位分别为： top right bottom left
+
+*/
+
+/* 内容窗口 */
+.bordered-window-content {
+    width: 80%;
+    padding: 20px;
+    border: 2px solid #9aff9a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 10px;
+
+    margin: auto auto 50px auto;
+}
+
+/* 首页内容flex容器 */
+.content-container-flex {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+
+/* flex内容窗口 */
+.bordered-window-content-flex {
+    width: 60%;
+    padding: 20px;
+    border: 2px solid #9aff9a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 10px;
+
+}
+
+/* flex内容图片 */
+
+.img-container-flex {
+    width: 20%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.img-container-flex img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.scrollbox {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    overflow: hidden;
+}
+
+.scrollbox_container {
+    justify-content: start;
+    height: 100vh;
+    flex-shrink: 0;
+}
+
+.scrollbox_container_card {
+    display: block;
+    position: relative;
+    width: 65rem;
+    height: 40rem;
+    background-color: #f7f7f7;
+    border-radius: 5rem;
+    margin-left: 5rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
