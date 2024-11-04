@@ -1,0 +1,170 @@
+<!--
+ * @Author: bddk
+ * @Date: 2024-10-28 23:38:43
+ * @LastEditors: bddk
+ * @LastEditTime: 2024-11-02 20:15:04
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相关文章引用</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .testimonial-container {
+            background-color: green;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: absolute; /* 改为绝对定位 */
+            top: 50%; /* 垂直居中 */
+            left: 50%; /* 水平居中 */
+            transform: translate(-50%, -50%); /* 通过平移实现居中 */
+            width: 80%; /* 调整宽度 */
+            height: auto; /* 自动调整高度 */
+            margin: 0; /* 移除外边距 */
+        }
+        .progress-bar {
+            height: 5px;
+            background-color: white;
+            width: 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: width 10s linear;
+        }
+        .testimonial a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<nav>
+    <img src="../Static/Logo.png" alt="Logo" class="nav-logo">
+    <ul>
+        <li><a href="home.html" data-hover-text="Home"><span>首页</span></a></li>
+        <li><a href="eco-construction.html" data-hover-text="Eco-construction"><span>生态文明建设</span></a></li>
+        <li><a href="eco-project.html" data-hover-text="Eco-proj"><span>环保项目</span></a></li>
+        <li><a href="art-relative.html" data-hover-text="Relative" class="active"><span>相关文章引用</span></a></li>
+    </ul>
+</nav>
+
+<!-- 添加一个空的 div 元素 -->
+<div style="height: 50px;"></div>
+
+<!-- 文献列表 -->
+<section class="references">
+    <div class="testimonial-container">
+        <div class="progress-bar"></div>
+        <p class="testimonial"></p>
+    </div>
+</section>
+
+<script>
+const testimonials = [
+  {
+    name: '《中国生态环境治理现代化研究：问题与展望》',
+    position: '中文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://www.social.uestc.edu.cn/cn/article/doi/10.14071/j.1008-8105%282021%29-5008?viewType=HTML',
+    summary: '该文探讨了中国生态环境治理现代化的概念、特征、理论依据及对策建议，旨在为实现生态环境治理现代化提供理论支持和实践指导。',
+  },
+  {
+    name: '《环境大数据在我国环境治理中的应用研究》',
+    position: '中文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://www.prcee.org/xskw/jpwz/2021/2021_3/202204/W020220421606326150812.pdf',
+    summary: '本文分析了环境大数据的概念及其在中国环境治理中的应用，探讨了大数据技术在环境监测、污染防治、生态保护等方面的作用和前景。',
+  },
+  {
+    name: '《我国海洋生态文明研究文献综述》',
+    position: '中文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://pdf.hanspub.org/SSEM20230100000_67110249.pdf',
+    summary: '该文综述了中国海洋生态文明建设的研究内容和时代背景，分析了当前研究的热点和不足，并提出了未来研究的方向。',
+  },
+  {
+    name: '《环境保护前沿》',
+    position: '中文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://www.hanspub.org/Journal/AEP.html',
+    summary: '这是一本关注环境保护领域最新进展的国际中文期刊，刊登有关空气污染监测和建模、大气污染防治等领域的最新论文。',
+  },
+  {
+    name: '《环境保护科学》投稿须知',
+    position: '中文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://hjbh.cbpt.cnki.net/WKB2/WebPublication/wkTextContent.aspx?mid=hjbh&navigationContentID=0a96be87-490b-49ff-90aa-bee7b5d1b2cc',
+    summary: '该文介绍了《环境保护科学》期刊的投稿要求和联系方式，旨在指导作者正确投稿，提高稿件录用率。',
+  },
+  {
+    name: 'Environmental Science and Ecotechnology',
+    position: '英文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://lib.hqu.edu.cn/info/1147/4368.htm',
+    summary: '该期刊由中国环境科学学会等主办，报道环境科学与生态技术领域的热点问题和突破性研究成果。',
+  },
+  {
+    name: 'Journal of Environmental Sciences',
+    position: '英文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://sns.wanfangdata.com.cn/sns/perio/jes-e/?isSync=0&issueNum=01&page=1&publishYear=2022&tabId=article',
+    summary: '这是中国第一份环境科学方面的综合性英文版学术期刊，报道环境科学研究领域的最新进展。',
+  },
+  {
+    name: 'Review of English Literatures on Climate Change and Forests',
+    position: '英文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://image.hanspub.org/Html/6-2210105_18710.htm',
+    summary: '该文收集了近20年间的1743篇英文文献，全面梳理了全球气候变化对森林生态系统影响的国际研究进展。',
+  },
+  {
+    name: 'Review the Development Trend of Ecological Restoration in International Watersheds',
+    position: '英文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://pdf.hanspub.org/GSER20190200000_68796884.pdf',
+    summary: '该文回顾了国际流域生态修复的趋势，并探讨了对中国的借鉴意义。',
+  },
+  {
+    name: 'INTERNATIONAL COVENANT ON ENVIRONMENT AND DEVELOPMENT',
+    position: '英文文献',
+    photo: 'https://via.placeholder.com/75',
+    text: 'https://portals.iucn.org/library/sites/library/files/documents/EPLP-031-rev3-Zh.pdf',
+    summary: '该文介绍了环境与发展的国际公约，强调了和平、发展、环境保护及尊重人权和基本自由的不可分性。',
+  },
+];
+
+let idx = 0;
+
+function updateTestimonial() {
+  const { name, text, summary } = testimonials[idx];
+
+  document.querySelector('.testimonial').innerHTML = `<a href="${text}" target="_blank">${name}</a><p>${summary}</p>`;
+  
+  // 重置进度条动画
+  const progressBar = document.querySelector('.progress-bar');
+  progressBar.style.transition = 'none';
+  progressBar.style.width = '0';
+  setTimeout(() => {
+    progressBar.style.transition = 'width 10s linear';
+    progressBar.style.width = '100%';
+  }, 50); // 将延迟时间减少到50毫秒
+
+  idx = (idx + 1) % testimonials.length; // 使用取模运算符简化索引更新
+}
+
+setInterval(updateTestimonial, 10000);
+
+// 添加点击事件监听器
+document.querySelector('.testimonial-container').addEventListener('click', updateTestimonial);
+
+updateTestimonial();
+</script>
+</body>
+</html>
