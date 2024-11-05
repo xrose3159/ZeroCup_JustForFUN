@@ -44,8 +44,40 @@
 
 <!-- 首页大图片 -->
 
-<div class="img-container1">
-    <img src="../Static/ecology1.png" alt="标题图片">
+<div class="slider-container" style="display: block;">
+    <div class="left-slide" style="display: block;">
+        <div style="background-image: linear-gradient(to right,#3a3a3a, #777777);">
+            <h1>城市雾霾</h1>
+            <p>City Smog</p>
+        </div>
+        <div style="background-image: linear-gradient(to bottom,#d7a901, #e0c89c);">
+            <h1>工业污染</h1>
+            <p>Industry Pollution</p>
+        </div>
+        <div style="background-image: linear-gradient(to top,#00b2ff, #9fffdf);">
+            <h1>沙滩与海洋</h1>
+            <p>Beach & Ocean</p>
+        </div>
+        <div style="background-image: linear-gradient(to bottom,#055901, #75c95b);">
+            <h1>丛林</h1>
+            <p>Forest</p>
+        </div>
+    </div>
+    <div class="right-slide"style="display: block;">
+        <div style="background-image: url('https://img2.baidu.com/it/u=2476148102,3359302732&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800')"></div>
+        <div style="background-image: url('https://img2.baidu.com/it/u=1391386134,795547674&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=800')"></div>
+        <div style="background-image: url('https://p2.itc.cn/images01/20230419/ed2d4ac4e05b4edb91c3f45797b44c7b.jpeg')"></div>
+        <div style="background-image: url('https://n1.itc.cn/img8/wb/smccloud/recom/2015/11/11/144725315860895161.JPEG')"></div>
+
+    </div>
+    <div class="action-buttons" style="display: none">
+        <button class="down-button">
+            <i class="fas fa-arrow-down"></i>
+        </button>
+        <button class="up-button">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
 </div>
 
 <!--首页正大标题1 -->
@@ -159,6 +191,50 @@
     window.addEventListener("scroll", () => {
         scrollbox.move();
     })
+
+    let slideInterval;
+
+    const autoSlide = () => {
+        slideInterval = setInterval(() => {
+            changeSlide('up');  // 根据需要选择'up'或'down'
+        }, 4000); // 4s
+    };
+
+    autoSlide()
+
+
+
+    const sliderContainer = document.querySelector('.slider-container')
+    const slideRight = document.querySelector('.right-slide')
+    const slideLeft = document.querySelector('.left-slide')
+    const upButton = document.querySelector('.up-button')
+    const downButton = document.querySelector('.down-button')
+    const slidesLength = slideRight.querySelectorAll('div').length
+
+    let activeSlideIndex = 0
+
+    slideLeft.style.top = `-${(slidesLength - 1) * 100}vh`
+
+    upButton.addEventListener('click', () => changeSlide('up'))
+    downButton.addEventListener('click', () => changeSlide('down'))
+
+    const changeSlide = (direction) => {
+        const sliderHeight = sliderContainer.clientHeight
+        if(direction === 'up') {
+            activeSlideIndex++
+            if(activeSlideIndex > slidesLength - 1) {
+                activeSlideIndex = 0
+            }
+        } else if(direction === 'down') {
+            activeSlideIndex--
+            if(activeSlideIndex < 0) {
+                activeSlideIndex = slidesLength - 1
+            }
+        }
+
+        slideRight.style.transform = `translateY(-${activeSlideIndex * sliderHeight}px)`
+        slideLeft.style.transform = `translateY(${activeSlideIndex * sliderHeight}px)`
+    }
 
 </script>
 </html>
