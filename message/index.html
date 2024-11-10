@@ -33,7 +33,9 @@
     function handleSubmit() {
       const content = document.getElementById('content').value;
       if (content) {
-        uploadMessage(content);
+        uploadMessage(content).then(() => {
+          document.getElementById('content').value = ''; // 清空输入框
+        });
       } else {
         alert('请填写留言内容');
       }
@@ -73,6 +75,9 @@
         messagesContainer.appendChild(table); // 将表格添加到容器
       });
     }
+
+    // 页面加载时自动刷新留言列表
+    window.onload = displayMessages;
   </script>
 </body>
 </html>
