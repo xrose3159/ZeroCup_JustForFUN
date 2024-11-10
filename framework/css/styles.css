@@ -369,10 +369,9 @@ h2 {
 /* 内容容器 */
 .content {
     position: relative;
-    z-index: 1; /* 确保内容在视频之上 */
+    z-index: 1; 
     padding: 20px;
-    background: rgba(255, 255, 255, 0.8); /* 可选：为内容添加半透明背景 */
-}
+    background: rgba(255, 255, 255, 0.8); }
 
 .project-container {
     display: flex;
@@ -385,7 +384,7 @@ h2 {
     border: 1px solid #79ffa1;
     border-radius: 5px;
     overflow-y: auto;
-    height: 800px;
+    height: 75rem;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

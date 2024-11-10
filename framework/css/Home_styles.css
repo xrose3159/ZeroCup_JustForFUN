@@ -167,12 +167,23 @@ html {
 }
 
 /* 大标题 */
-.centered-title {
-    text-align: center;
-    font-size: 56px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+.centered-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #4CAF50; /* 设置整个容器的背景为绿色 */
+    padding: 20px 0; /* 添加上下内边距 */
 }
+
+.centered-title {
+    font-size: 56px;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 3s ease-in-out;
+}
+
+
 
 /* 额外明确一下margin属性的用法：
 

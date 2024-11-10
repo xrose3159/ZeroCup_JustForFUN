@@ -1,6 +1,6 @@
 :root {
-    --left-bg-color: rgba(245, 252, 247, 0.7);
-    --middle-bg-color: rgba(200, 200, 200, 0.8);
+    --left-bg-color: rgba(19, 168, 76, 0.8);
+    --middle-bg-color: rgb(255, 255, 255);
     --right-bg-color: rgba(19, 168, 76, 0.8);
     --left-width: 40%;       /* 左列占屏幕40% */
     --middle-width: 20%;     /* 中间列占屏幕20% */
@@ -149,6 +149,10 @@ nav ul li a.active::after {
     background-color: var(--left-bg-color);
     width: var(--left-width); 
     left: 0;
+    overflow-y: auto; /* 启用垂直滚动条 */
+    padding: 20px;
+    box-sizing: border-box;
+    padding-top: 30px;
     /* background-image: url('./Static/ecology1.png');  */
 }
 
@@ -162,6 +166,7 @@ nav ul li a.active::after {
 .split.right {
     background-color: var(--right-bg-color);
     width: var(--right-width);
+    padding-top: 30px;
 }
 
 /* 悬停放大效果 */
@@ -190,10 +195,19 @@ nav ul li a.active::after {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid #4CAF50;
     max-width: 90%;
     color: #333;
     font-size: 1rem;
     line-height: 1.6;
+    margin-bottom: 30px;
+    height: 250px; /* 设置固定高度 */
+    overflow-y: auto;
+    min-width: 100px; /* 设置最小宽度，避免过窄 */
+    max-width: 1000px;
+}
+.text-box::-webkit-scrollbar {
+    display: none; /* Chrome, Safari 和 Edge */
 }
 
 /* 时间轴容器 */
@@ -233,10 +247,16 @@ nav ul li a.active::after {
 }
 
 .timeline-event h4 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #4CAF50;
-    margin-top: 20px; /* 增加顶部间距，使年份和事件描述位于圆圈下方 */
-    padding: 0;
+    margin-bottom: 10px;
+}
+
+/* 卡片内容文本样式 */
+.event-card p {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.6;
 }
 
 /* 时间点的圆圈标记 */
@@ -269,22 +289,49 @@ nav ul li a.active::after {
     gap: 20px; 
     transition: all 0.3s ease;
 }
-
+.content-display1 {
+    width: 90%;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    color: #333;
+    text-align: left;
+    overflow-y: auto;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+    transition: all 0.3s ease;
+}
 
 
 /* 默认卡片样式 */
 .event-card {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-left: 4px solid #4CAF50;
-    width: 100%; /* 卡片默认全宽 */
-    max-width: 300px;
+    background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #4CAF50;
+    width: 90%; /* 调整为相对宽度，更加自适应 */
+    max-width: 700px; /* 增加最大宽度 */
+    min-width: 320px; /* 设置最小宽度，避免过窄 */
     transition: all 0.3s ease;
-    transform: scale(0.8); /* 初始缩小 */
-    opacity: 0.7; /* 初始半透明 */
+    transform: scale(0.9); /* 调整缩放效果 */
+    opacity: 0.9; /* 提高透明度 */
+    height: 280px; /* 增加高度 */
+  }
+
+.event-card::-webkit-scrollbar {
+    display: none; /* Chrome, Safari 和 Edge */
 }
+/* 悬停效果 */
+.event-card:hover {
+    transform: scale(1); /* 放大效果 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
 
 /* 放大后的卡片样式 */
 .event-card.active {
@@ -318,4 +365,4 @@ nav ul li a.active::after {
     background-color: rgba(76, 175, 80, 0.2); /* 高亮对应事件的背景 */
     padding: 10px;
     border-radius: 4px;
-}
+    }
