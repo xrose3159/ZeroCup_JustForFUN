@@ -342,38 +342,68 @@ h2 {
 
 
 /*下面是第三页用到的CSS样式*/
+/* 视频背景容器 */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 确保视频在所有内容之下 */
+    overflow: hidden;
+}
+
+.video-background video {
+    width: 100vw; /* 使用视口宽度 */
+    height: 56.25vw; /* 16:9 比例 */
+    min-height: 100vh; /* 最小高度为视口高度 */
+    min-width: 177.78vh; /* 16:9 比例 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* 确保视频覆盖整个容器 */
+    pointer-events: none; /* 禁止交互 */
+}
+
+/* 内容容器 */
+.content {
+    position: relative;
+    z-index: 1; /* 确保内容在视频之上 */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* 可选：为内容添加半透明背景 */
+}
+
 .project-container {
-    display: flex; /* 使用flex布局，允许子元素灵活排列 */
-    justify-content: space-between; /* 让窗口之间保持相等的空间 */
-    margin: 70px 20px; /* 设置外边距，上边距为60px，左右边距为20px */
+    display: flex;
+    justify-content: space-between;
+    margin: 70px 20px;
 }
 
 .project-window {
-    width: 49%; /* 每个窗口占据48%的宽度，留出空间给两个窗口之间的间距 */
-    border: 1px solid #ccc; /* 设置窗口的边框颜色和样式 */
-    border-radius: 5px; /* 设置窗口的圆角效果 */
-    overflow-y: auto; /* 允许窗口内部内容垂直滚动 */
-    height: 800px; /* 设置窗口的固定高度为800px */
-    padding: 10px; /* 内边距，给窗口内部内容提供空间 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果，增强视觉层次感 */
+    width: 49%;
+    border: 1px solid #79ffa1;
+    border-radius: 5px;
+    overflow-y: auto;
+    height: 800px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .project-cards {
-    display: flex; /* 使用flex布局，方便管理内部元素 */
-    flex-direction: column; /* 垂直排列卡片，使它们堆叠在一起 */
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card {
-    background-color: #a0a0a063; /* 设置卡片的背景颜色，带有透明度 */
-    margin: 10px 0; /* 卡片的上下间距设置为10px，确保卡片之间有一定的间隔 */
-    padding: 100px; /* 卡片内部填充空间，增加内容的可读性和美观性 */
-    border: 1px solid #e6e6e6; /* 设置卡片的边框，颜色较浅，增强层次感 */
-    border-radius: 20px; /* 设置窗口的圆角效果 */
-    background-size: cover; /* 背景图片覆盖整个卡片 */
-    background-position: center; /* 背景图片居中显示 */
-    /*color: white; /* 文字颜色设置为白色，以便在背景图片上清晰显示 */
-    /*text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 文字阴影，增强可读性 */
-    position: relative; /* 为遮罩层提供定位上下文 */
+    background-color: #a0a0a063;
+    margin: 10px 0;
+    padding: 100px;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
 .project-card::before {
@@ -383,16 +413,17 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色遮罩层 */
-    z-index: 1; /* 确保遮罩层在文字下方 */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    z-index: 1;
 }
 
 .project-card a,
 .project-card .description {
-    position: relative; /* 确保文字在遮罩层上方 */
-    z-index: 2; /* 确保文字在遮罩层上方 */
-    color: rgb(255, 255, 255); /* 文字颜色设置为白色 */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 文字阴影，增强可读性 */
+    position: relative;
+    z-index: 2;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -400,7 +431,7 @@ h2 {
 .app {
     width: 100%; /* 设置宽度为100%，使组件充满父容器 */
     height: 60px; /* 调整高度以适应项目窗口的布局 */
-    background-color: #9797977c; /* 设置背景颜色为半透明的白色 */
+    background-color: #00ffaaaf; 
     position: relative; /* 设置相对定位，以便绝对定位的子元素可以相对于此元素定位 */
     display: flex; /* 使用flex布局，便于对齐和排列子元素 */
     justify-content: center; /* 水平居中对齐子元素 */

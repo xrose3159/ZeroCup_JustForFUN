@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-<!-- 顶部导航栏 -->
+    <!-- 顶部导航栏 -->
 <nav>
     <img src="../Static/Logo.png" alt="Logo" class="nav-logo">
     <ul>
@@ -18,6 +18,14 @@
     </ul>
 </nav>
 
+
+<!-- 视频背景容器 -->
+<div class="video-background">
+    <video autoplay muted loop playsinline>
+        <source src="../Static/bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
 
 <div class="project-container">
     <div class="project-window" id="world-harmony">
@@ -170,8 +178,8 @@ function addCard(container, project) {
     newCard.className = 'project-card';
     newCard.style.backgroundImage = `url(${project.image})`; // 动态设置背景图片
     newCard.innerHTML = `
-        <a href="${project.link}" target="_blank">${project.name}</a>
-        <div class="description">${project.description}</div>
+        <a href="${project.link}" target="_blank" style="font-size: 25px;">${project.name}</a>
+        <div class="description"style="font-size: 18px;">${project.description}</div>
     `;
     container.appendChild(newCard);
 }
