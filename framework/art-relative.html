@@ -2,7 +2,7 @@
  * @Author: bddk
  * @Date: 2024-10-28 23:38:43
  * @LastEditors: bddk
- * @LastEditTime: 2024-11-02 20:15:04
+ * @LastEditTime: 2024-11-10 22:25:02
 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>相关文章引用</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script> <!-- 引入LeanCloud SDK -->
     <style>
         .testimonial-container {
             background-color: green;
@@ -19,13 +19,10 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            position: absolute; /* 改为绝对定位 */
-            top: 50%; /* 垂直居中 */
-            left: 50%; /* 水平居中 */
-            transform: translate(-50%, -50%); /* 通过平移实现居中 */
-            width: 80%; /* 调整宽度 */
-            height: auto; /* 自动调整高度 */
-            margin: 0; /* 移除外边距 */
+            width: 80%;
+            height: auto;
+            margin: 20px auto;
+            position: relative;
         }
         .progress-bar {
             height: 5px;
@@ -41,6 +38,236 @@
             text-decoration: none;
             font-size: 1.2em;
         }
+        .message-board {
+            margin: 20px auto;
+            padding: 30px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+        .message-board::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                rgba(76, 175, 80, 0.03) 0%,
+                rgba(76, 175, 80, 0.05) 100%
+            );
+            transform: rotate(-45deg);
+            z-index: 0;
+        }
+        .message-board h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .message-board h2::before {
+            content: '"';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -20px;
+            font-size: 40px;
+            color: #4CAF50;
+            opacity: 0.2;
+        }
+        .message-input {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .message-input input {
+            flex: 0 1 400px;
+            padding: 15px 25px;
+            border: 2px solid rgba(76, 175, 80, 0.2);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            width: auto;
+            min-width: 300px;
+        }
+        .message-input input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
+            transform: translateY(-2px);
+        }
+        .message-input button {
+            flex: 0 0 auto;
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+            white-space: nowrap;
+        }
+        .message-input button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+            background: linear-gradient(145deg, #45a049, #4CAF50);
+        }
+        #messages table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #messages th, #messages td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        #messages th {
+            background-color: #f2f2f2;
+        }
+        #refreshButton {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        #refreshButton:hover {
+            background-color: #45a049;
+        }
+        /* 弹幕容器样式 */
+        .danmaku-container {
+            position: relative;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            margin: 25px 0;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(76, 175, 80, 0.1);
+        }
+        .danmaku {
+            position: absolute;
+            white-space: nowrap;
+            color: white;
+            font-size: 16px;
+            padding: 8px 15px;
+            background: linear-gradient(145deg, #7bc67f, #69b76d);
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(123, 198, 127, 0.3);
+            animation: danmakuMove linear;
+            left: 100%;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(123, 198, 127, 0.3);
+        }
+        @keyframes danmakuMove {
+            from {
+                left: 100%;
+            }
+            to {
+                left: -100%;
+            }
+        }
+        .danmaku:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+        @media (max-width: 768px) {
+            .message-input {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .message-input input {
+                min-width: 200px;
+                width: 100%;
+            }
+            .message-input button {
+                width: 100%;
+            }
+            .message-board h2 {
+                font-size: 24px;
+            }
+        }
+        /* 添加浮动提示框样式 */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .toast {
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease-out forwards, fadeOut 0.3s ease-out forwards 2.7s;
+            max-width: 300px;
+        }
+
+        .toast.error {
+            background: linear-gradient(145deg, #ff4444, #cc0000);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -55,17 +282,33 @@
     </ul>
 </nav>
 
-<!-- 添加一个空的 div 元素 -->
-<div style="height: 50px;"></div>
-
 <!-- 文献列表 -->
-<section class="references">
-    <div class="testimonial-container">
-        <div class="progress-bar"></div>
-        <p class="testimonial"></p>
-    </div>
-</section>
+<div style="margin-top: 80px;">
+    <section class="references">
+        <div class="testimonial-container">
+            <div class="progress-bar"></div>
+            <p class="testimonial"></p>
+        </div>
+    </section>
 
+    <!-- 添加留言区 -->
+    <section class="message-board">
+        <h2>留言区</h2>
+        <div class="message-input">
+            <input type="text" id="content" placeholder="说点什么吧...">
+            <button onclick="handleSubmit()">发送留言</button>
+        </div>
+        
+        <!-- 只保留弹幕容器 -->
+        <div class="danmaku-container" id="danmakuContainer"></div>
+    </section>
+</div>
+
+<!-- 在 body 末尾添加提示框容器 -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="../message/config.js"></script>
+<script src="../message/message.js"></script>
 <script>
 const testimonials = [
   {
@@ -97,7 +340,7 @@ const testimonials = [
     summary: '这是一本关注环境保护领域最新进展的国际中文期刊，刊登有关空气污染监测和建模、大气污染防治等领域的最新论文。',
   },
   {
-    name: '《环境保护科学》投稿须知',
+    name: '《环境保护科学》投稿须',
     position: '中文文献',
     photo: 'https://via.placeholder.com/75',
     text: 'https://hjbh.cbpt.cnki.net/WKB2/WebPublication/wkTextContent.aspx?mid=hjbh&navigationContentID=0a96be87-490b-49ff-90aa-bee7b5d1b2cc',
@@ -122,7 +365,7 @@ const testimonials = [
     position: '英文文献',
     photo: 'https://via.placeholder.com/75',
     text: 'https://image.hanspub.org/Html/6-2210105_18710.htm',
-    summary: '该文收集了近20年间的1743篇英文文献，全面梳理了全球气候变化对森林生态系统影响的国际研究进展。',
+    summary: '该文收集了近20年间的1743篇英文文献，全面梳理了全球气候变化对森林生态系统影的国际研究进展。',
   },
   {
     name: 'Review the Development Trend of Ecological Restoration in International Watersheds',
@@ -154,7 +397,7 @@ function updateTestimonial() {
   setTimeout(() => {
     progressBar.style.transition = 'width 10s linear';
     progressBar.style.width = '100%';
-  }, 50); // 将延迟时间减少到50毫秒
+  }, 50); // 将延迟时减到50毫秒
 
   idx = (idx + 1) % testimonials.length; // 使用取模运算符简化索引更新
 }
@@ -165,6 +408,162 @@ setInterval(updateTestimonial, 10000);
 document.querySelector('.testimonial-container').addEventListener('click', updateTestimonial);
 
 updateTestimonial();
+
+  // 提交留言的事件处理函数
+  function handleSubmit() {
+    const content = document.getElementById('content').value;
+    if (content) {
+        uploadMessage(content).then(() => {
+            document.getElementById('content').value = ''; // 清空输入框
+            createDanmaku(content); // 立即显示弹幕
+            showToast('留言发送成功！'); // 显示成功提示
+        }).catch(error => {
+            console.error('提交留言失败:', error);
+            showToast('提交留言失败，请稍后重试', 'error'); // 显示错误提示
+        });
+    } else {
+        showToast('请填写留言内容', 'error'); // 显示错误提示
+    }
+  }
+
+  // 添加弹幕相关函数
+  function createDanmaku(content) {
+    const danmaku = document.createElement('div');
+    danmaku.className = 'danmaku';
+    danmaku.textContent = content;
+    
+    // 随机垂直位置，确保不同弹幕不会重叠
+    const lanes = 8; // 将容器分成8个轨道
+    const laneHeight = 150 / lanes;
+    const randomLane = Math.floor(Math.random() * lanes);
+    const top = randomLane * laneHeight + 10; // 添加一些上边距
+    danmaku.style.top = `${top}px`;
+    
+    const container = document.getElementById('danmakuContainer');
+    container.appendChild(danmaku);
+    
+    // 计算动画持续时间
+    const containerWidth = container.offsetWidth;
+    const danmakuWidth = danmaku.offsetWidth;
+    const totalDistance = containerWidth + danmakuWidth + 100; // 增加一些距离确保完全移出
+    const baseSpeed = 200; // 调整基础速度
+    const duration = totalDistance / baseSpeed;
+    
+    danmaku.style.animationDuration = `${duration}s`;
+    
+    // 动画结束后移除弹幕
+    danmaku.addEventListener('animationend', () => {
+        danmaku.remove();
+    });
+  }
+
+  // 使用队列来管理弹幕发送
+  let messageQueue = [];
+  let isProcessingQueue = false;
+
+  // 修改定期获取消息的函数
+  function updateMessageQueue() {
+      getMessages().then((messagesDict) => {
+          messageQueue = Object.values(messagesDict);
+          // 如果是首次加载且有消息，立即发送几条弹幕
+          if (messageQueue.length > 0 && !initialDanmakusSent) {
+              sendInitialDanmakus();
+          }
+      });
+  }
+
+  // 添加一个标志来追踪是否已发送初始弹幕
+  let initialDanmakusSent = false;
+
+  // 添加初始弹幕发送函数
+  function sendInitialDanmakus() {
+      initialDanmakusSent = true;
+      // 立即发送3-5条随机弹幕
+      const initialCount = Math.floor(Math.random() * 3) + 3;
+      for (let i = 0; i < initialCount; i++) {
+          setTimeout(() => {
+              if (messageQueue.length > 0) {
+                  const randomIndex = Math.floor(Math.random() * messageQueue.length);
+                  createDanmaku(messageQueue[randomIndex]);
+              }
+          }, i * 500); // 每500ms发送一条
+      }
+  }
+
+  // 页面加载完成后立即获取消息并开始显示弹幕
+  document.addEventListener('DOMContentLoaded', () => {
+      updateMessageQueue(); // 立即获取消息
+  });
+
+  // 修改处理队列中的消息的函数
+  function processMessageQueue() {
+      if (messageQueue.length > 0) {
+          // 移除 isProcessingQueue 检查，允许同时多条弹幕
+          const randomIndex = Math.floor(Math.random() * messageQueue.length);
+          const message = messageQueue[randomIndex];
+          createDanmaku(message);
+      }
+  }
+
+  // 调整定时器间隔
+  setInterval(updateMessageQueue, 5000); // 每5秒更新一次消息队列
+  setInterval(processMessageQueue, 800); // 更频繁地发送弹幕，每800ms检查一次
+
+  // 修改弹幕创建函数中的速度计算
+  function createDanmaku(content) {
+    const danmaku = document.createElement('div');
+    danmaku.className = 'danmaku';
+    danmaku.textContent = content;
+    
+    // 随机垂直位置，确保不同弹幕不会重叠
+    const lanes = 8;
+    const laneHeight = 150 / lanes;
+    const randomLane = Math.floor(Math.random() * lanes);
+    const top = randomLane * laneHeight + 10;
+    danmaku.style.top = `${top}px`;
+    
+    const container = document.getElementById('danmakuContainer');
+    container.appendChild(danmaku);
+    
+    // 调整速度计算
+    const containerWidth = container.offsetWidth;
+    const danmakuWidth = danmaku.offsetWidth;
+    const totalDistance = containerWidth + danmakuWidth + 100;
+    const baseSpeed = 250; // 稍微调整速度
+    const duration = totalDistance / baseSpeed;
+    
+    // 添加随机速度变化
+    const speedVariation = 0.2; // 20%的速度变化
+    const finalDuration = duration * (1 + (Math.random() * 2 - 1) * speedVariation);
+    
+    danmaku.style.animationDuration = `${finalDuration}s`;
+    
+    danmaku.addEventListener('animationend', () => {
+        danmaku.remove();
+    });
+  }
+
+  // 添加显示提示的函数
+  function showToast(message, type = 'success') {
+      const toastContainer = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type === 'error' ? 'error' : ''}`;
+      
+      const icon = type === 'success' ? '✓' : '✕';
+      toast.innerHTML = `
+          <span class="toast-icon">${icon}</span>
+          <span class="toast-message">${message}</span>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      // 3秒后移除提示
+      setTimeout(() => {
+          toast.addEventListener('animationend', () => {
+              toast.remove();
+          });
+      }, 3000);
+  }
 </script>
 </body>
 </html>

@@ -13,10 +13,10 @@ function uploadMessage(content) {
   message.set('content', content);
   return message.save().then((savedMessage) => {
     console.log('留言已保存:', savedMessage);
-    alert('留言成功！');
-    getMessages(); // 上传后自动刷新留言列表
+    return savedMessage; // 直接返回保存的消息
   }).catch((error) => {
-    console.error('留言保存失败:', error.message); // 显示错误消息
+    console.error('留言保存失败:', error.message);
+    throw error; // 抛出错误以便外部处理
   });
 }
 
