@@ -2,7 +2,7 @@
  * @Author: bddk
  * @Date: 2024-10-28 23:38:43
  * @LastEditors: bddk
- * @LastEditTime: 2024-11-10 22:59:43
+ * @LastEditTime: 2024-11-17 12:50:27
 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -19,9 +19,10 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            width: 80%;
+            width: 100%;
+            max-width: 1200px;
             height: auto;
-            margin: 20px auto;
+            margin: 0 auto;
             position: relative;
         }
         .progress-bar {
@@ -39,12 +40,13 @@
             font-size: 1.2em;
         }
         .message-board {
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 30px;
             background: linear-gradient(145deg, #ffffff, #f0f0f0);
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            max-width: 90%;
+            width: 100%;
+            max-width: 1200px;
             position: relative;
             overflow: hidden;
         }
@@ -95,6 +97,7 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -163,9 +166,10 @@
             height: 200px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
-            margin: 25px 0;
+            margin: 25px auto;
             overflow: hidden;
             width: 100%;
+            max-width: 1000px;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(76, 175, 80, 0.1);
         }
@@ -197,19 +201,35 @@
             z-index: 10;
         }
         @media (max-width: 768px) {
+            .main-container {
+                width: 95%;
+                padding: 10px;
+            }
+            
+            .testimonial-container,
+            .message-board {
+                width: 100%;
+                padding: 15px;
+            }
+            
             .message-input {
                 flex-direction: column;
                 padding: 15px;
+                width: 95%;
             }
+            
             .message-input input {
-                min-width: 200px;
                 width: 100%;
+                min-width: unset;
             }
+            
             .message-input button {
                 width: 100%;
+                margin-top: 10px;
             }
-            .message-board h2 {
-                font-size: 24px;
+            
+            .danmaku-container {
+                width: 95%;
             }
         }
         /* 添加浮动提示框样式 */
@@ -268,302 +288,370 @@
             font-size: 14px;
             font-weight: 500;
         }
+
+        /* 添加大屏幕优化 */
+        @media (min-width: 1440px) {
+            .main-container {
+                max-width: 1600px;
+            }
+        }
+
+        /* 添加一个主容器样式来包裹所有内容 */
+        .main-container {
+            max-width: 1400px;
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            min-height: calc(100vh - 160px);
+            justify-content: center;
+        }
+
+        /* 修改body样式以支持绝对定位 */
+        body {
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            padding-top: 60px;
+        }
+
+        /* 调整导航栏样式确保它始终在顶部 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* 调整响应式布局 */
+        @media (max-width: 768px) {
+            .main-container {
+                width: 95%;
+                padding: 10px;
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                margin: 80px auto 20px;
+                min-height: calc(100vh - 100px);
+            }
+        }
+
+        /* 大屏幕优化 */
+        @media (min-width: 1440px) {
+            .main-container {
+                max-width: 1600px;
+            }
+        }
+
+        /* 确保内容容器有合适的间距 */
+        .testimonial-container,
+        .message-board {
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
-<!-- 顶部导航栏 -->
-<nav>
-    <img src="../Static/Logo.png" alt="Logo" class="nav-logo">
-    <ul>
-        <li><a href="home.html" data-hover-text="Home"><span>首页</span></a></li>
-        <li><a href="eco-construction.html" data-hover-text="Eco-construction"><span>生态文明建设</span></a></li>
-        <li><a href="eco-project.html" data-hover-text="Eco-proj"><span>环保项目</span></a></li>
-        <li><a href="art-relative.html" data-hover-text="Relative" class="active"><span>相关文章引用</span></a></li>
-    </ul>
-</nav>
+    <!-- 顶部导航栏 -->
+    <nav>
+        <img src="../Static/Logo.png" alt="Logo" class="nav-logo">
+        <ul>
+            <li><a href="home.html" data-hover-text="Home"><span>首页</span></a></li>
+            <li><a href="eco-construction.html" data-hover-text="Eco-construction"><span>生态文明建设</span></a></li>
+            <li><a href="eco-project.html" data-hover-text="Eco-proj"><span>环保项目</span></a></li>
+            <li><a href="art-relative.html" data-hover-text="Relative" class="active"><span>相关文章引用</span></a></li>
+        </ul>
+    </nav>
 
-<!-- 文献列表 -->
-<div style="margin-top: 80px;">
-    <section class="references">
-        <div class="testimonial-container">
-            <div class="progress-bar"></div>
-            <p class="testimonial"></p>
-        </div>
-    </section>
+    <!-- 添加主容器 -->
+    <div class="main-container">
+        <!-- 文献列表 -->
+        <section class="references">
+            <div class="testimonial-container">
+                <div class="progress-bar"></div>
+                <p class="testimonial"></p>
+            </div>
+        </section>
 
-    <!-- 添加留言区 -->
-    <section class="message-board">
-        <h2>留言区</h2>
-        <div class="message-input">
-            <input type="text" id="content" placeholder="说点什么吧...">
-            <button onclick="handleSubmit()">发送留言</button>
-        </div>
-        
-        <!-- 只保留弹幕容器 -->
-        <div class="danmaku-container" id="danmakuContainer"></div>
-    </section>
-</div>
+        <!-- 留言区 -->
+        <section class="message-board">
+            <h2>留言区</h2>
+            <div class="message-input">
+                <input type="text" id="content" placeholder="说点什么吧...">
+                <button onclick="handleSubmit()">发送留言</button>
+            </div>
+            <div class="danmaku-container" id="danmakuContainer"></div>
+        </section>
+    </div>
 
-<!-- 在 body 末尾添加提示框容器 -->
-<div class="toast-container" id="toastContainer"></div>
-
-<script src="../message/config.js"></script>
-<script src="../message/message.js"></script>
-<script>
-const testimonials = [
-  {
-    name: '《中国生态环境治理现代化研究：问题与展望》',
-    position: '中文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://www.social.uestc.edu.cn/cn/article/doi/10.14071/j.1008-8105%282021%29-5008?viewType=HTML',
-    summary: '该文探讨了中国生态环境治理现代化的概念、特征、理论依据及对策建议，旨在为实现生态环境治理现代化提供理论支持和实践指导。',
-  },
-  {
-    name: '《环境大数据在我国环境治理中的应用研究》',
-    position: '中文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://www.prcee.org/xskw/jpwz/2021/2021_3/202204/W020220421606326150812.pdf',
-    summary: '本文分析了环境大数据的概念及其在中国环境治理中的应用，探讨了大数据技术在环境监测、污染防治、生态保护等方面的作用和前景。',
-  },
-  {
-    name: '《我国海洋生态文明研究文献综述》',
-    position: '中文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://pdf.hanspub.org/SSEM20230100000_67110249.pdf',
-    summary: '该文综述了中国海洋生态文明建设的研究内容和时代背景，分析了当前研究的热点和不足，并提出了未来研究的方向。',
-  },
-  {
-    name: '《环境保护前沿》',
-    position: '中文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://www.hanspub.org/Journal/AEP.html',
-    summary: '这是一本关注环境保护领域最新进展的国际中文期刊，刊登有关空气污染监测和建模、大气污染防治等领域的最新论文。',
-  },
-  {
-    name: '《环境保护科学》投稿须',
-    position: '中文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://hjbh.cbpt.cnki.net/WKB2/WebPublication/wkTextContent.aspx?mid=hjbh&navigationContentID=0a96be87-490b-49ff-90aa-bee7b5d1b2cc',
-    summary: '该文介绍了《环境保护科学》期刊的投稿要求和联系方式，旨在指导作者正确投稿，提高稿件录用率。',
-  },
-  {
-    name: 'Environmental Science and Ecotechnology',
-    position: '英文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://lib.hqu.edu.cn/info/1147/4368.htm',
-    summary: '该期刊由中国环境科学学会等主办，报道环境科学与生态技术领域的热点问题和突破性研究成果。',
-  },
-  {
-    name: 'Journal of Environmental Sciences',
-    position: '英文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://sns.wanfangdata.com.cn/sns/perio/jes-e/?isSync=0&issueNum=01&page=1&publishYear=2022&tabId=article',
-    summary: '这是中国第一份环境科学方面的综合性英文版学术期刊，报道环境科学研究领域的最新进展。',
-  },
-  {
-    name: 'Review of English Literatures on Climate Change and Forests',
-    position: '英文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://image.hanspub.org/Html/6-2210105_18710.htm',
-    summary: '该文收集了近20年间的1743篇英文文献，全面梳理了全球气候变化对森林生态系统影的国际研究进展。',
-  },
-  {
-    name: 'Review the Development Trend of Ecological Restoration in International Watersheds',
-    position: '英文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://pdf.hanspub.org/GSER20190200000_68796884.pdf',
-    summary: '该文回顾了国际流域生态修复的趋势，并探讨了对中国的借鉴意义。',
-  },
-  {
-    name: 'INTERNATIONAL COVENANT ON ENVIRONMENT AND DEVELOPMENT',
-    position: '英文文献',
-    photo: 'https://via.placeholder.com/75',
-    text: 'https://portals.iucn.org/library/sites/library/files/documents/EPLP-031-rev3-Zh.pdf',
-    summary: '该文介绍了环境与发展的国际公约，强调了和平、发展、环境保护及尊重人权和基本自由的不可分性。',
-  },
-];
-
-let idx = 0;
-
-function updateTestimonial() {
-  const { name, text, summary } = testimonials[idx];
-
-  document.querySelector('.testimonial').innerHTML = `<a href="${text}" target="_blank">${name}</a><p>${summary}</p>`;
-  
-  // 重置进度条动画
-  const progressBar = document.querySelector('.progress-bar');
-  progressBar.style.transition = 'none';
-  progressBar.style.width = '0';
-  setTimeout(() => {
-    progressBar.style.transition = 'width 10s linear';
-    progressBar.style.width = '100%';
-  }, 50); // 将延迟时减到50毫秒
-
-  idx = (idx + 1) % testimonials.length; // 使用取模运算符简化索引更新
-}
-
-setInterval(updateTestimonial, 10000);
-
-// 添加点击事件监听器
-document.querySelector('.testimonial-container').addEventListener('click', updateTestimonial);
-
-updateTestimonial();
-
-  // 提交留言的事件处理函数
-  function handleSubmit() {
-    const content = document.getElementById('content').value;
-    if (content) {
-        uploadMessage(content).then(() => {
-            document.getElementById('content').value = ''; // 清空输入框
-            createDanmaku(content); // 立即显示弹幕
-            showToast('留言发送成功！'); // 显示成功提示
-        }).catch(error => {
-            console.error('提交留言失败:', error);
-            showToast('提交留言失败，请稍后重试', 'error'); // 显示错误提示
-        });
-    } else {
-        showToast('请填写留言内容', 'error'); // 显示错误提示
-    }
-  }
-
-  // 添加弹幕相关函数
-  function createDanmaku(content) {
-    const danmaku = document.createElement('div');
-    danmaku.className = 'danmaku';
-    danmaku.textContent = content;
+    <!-- 提示框容器 -->
+    <div class="toast-container" id="toastContainer"></div>
     
-    // 随机垂直位置，确保不同弹幕不会重叠
-    const lanes = 8; // 将容器分成8个轨道
-    const laneHeight = 150 / lanes;
-    const randomLane = Math.floor(Math.random() * lanes);
-    const top = randomLane * laneHeight + 10; // 添加一些上边距
-    danmaku.style.top = `${top}px`;
-    
-    const container = document.getElementById('danmakuContainer');
-    container.appendChild(danmaku);
-    
-    // 计算动画持续时间
-    const containerWidth = container.offsetWidth;
-    const danmakuWidth = danmaku.offsetWidth;
-    const totalDistance = containerWidth + danmakuWidth + 100; // 增加一些距离确保完全移出
-    const baseSpeed = 200; // 调整基础速度
-    const duration = totalDistance / baseSpeed;
-    
-    danmaku.style.animationDuration = `${duration}s`;
-    
-    // 动画结束后移除弹幕
-    danmaku.addEventListener('animationend', () => {
-        danmaku.remove();
-    });
-  }
+    <!-- 脚本引用 -->
+    <script src="../message/config.js"></script>
+    <script src="../message/message.js"></script>
+    <script>
+    const testimonials = [
+      {
+        name: '《中国生态环境治理现代化研究：问题与展望》',
+        position: '中文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://www.social.uestc.edu.cn/cn/article/doi/10.14071/j.1008-8105%282021%29-5008?viewType=HTML',
+        summary: '该文探讨了中国生态环境治理现代化的概念、特征、理论依据及对策建议，旨在为实现生态环境治理现代化提供理论支持和实践指导。',
+      },
+      {
+        name: '《环境大数据在我国环境治理中的应用研究》',
+        position: '中文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://www.prcee.org/xskw/jpwz/2021/2021_3/202204/W020220421606326150812.pdf',
+        summary: '本文分析了环境大数据的概念及其在中国环境治理中的应用，探讨了大数据技术在环境监测、污染防治、生态保护等方面的作用和前景。',
+      },
+      {
+        name: '《我国海洋生态文明研究文献综述》',
+        position: '中文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://pdf.hanspub.org/SSEM20230100000_67110249.pdf',
+        summary: '该文综述了中国海洋生态文明建设的研究内容和时代背景，分析了当前研究的热点和不足，并提出了未来研究的方向。',
+      },
+      {
+        name: '《环境保护前沿》',
+        position: '中文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://www.hanspub.org/Journal/AEP.html',
+        summary: '这是一本关注环境保护领域最新进展的国际中文期刊，刊登有关空气污染监测和建模、大气污染防治等领域的最新论文。',
+      },
+      {
+        name: '《环境保护科学》投稿须',
+        position: '中文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://hjbh.cbpt.cnki.net/WKB2/WebPublication/wkTextContent.aspx?mid=hjbh&navigationContentID=0a96be87-490b-49ff-90aa-bee7b5d1b2cc',
+        summary: '该文介绍了《环境保护科学》期刊的投稿要求和联系方式，旨在指导作者正确投稿，提高稿件录用率。',
+      },
+      {
+        name: 'Environmental Science and Ecotechnology',
+        position: '英文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://lib.hqu.edu.cn/info/1147/4368.htm',
+        summary: '该期刊由中国环境科学学会等主办，报道环境科学与生态技术领域的热点问题和突破性研究成果。',
+      },
+      {
+        name: 'Journal of Environmental Sciences',
+        position: '英文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://sns.wanfangdata.com.cn/sns/perio/jes-e/?isSync=0&issueNum=01&page=1&publishYear=2022&tabId=article',
+        summary: '这是中国第一份环境科学方面的综合性英文版学术期刊，报道环境科学研究领域的最新进展。',
+      },
+      {
+        name: 'Review of English Literatures on Climate Change and Forests',
+        position: '英文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://image.hanspub.org/Html/6-2210105_18710.htm',
+        summary: '该文收集了近20年间的1743篇英文文献，全面梳理了全球气候变化对森林生态系统影的国际研究进展。',
+      },
+      {
+        name: 'Review the Development Trend of Ecological Restoration in International Watersheds',
+        position: '英文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://pdf.hanspub.org/GSER20190200000_68796884.pdf',
+        summary: '该文回顾了国际流域生态修复的趋势，并探讨了对中国的借鉴意义。',
+      },
+      {
+        name: 'INTERNATIONAL COVENANT ON ENVIRONMENT AND DEVELOPMENT',
+        position: '英文文献',
+        photo: 'https://via.placeholder.com/75',
+        text: 'https://portals.iucn.org/library/sites/library/files/documents/EPLP-031-rev3-Zh.pdf',
+        summary: '该文介绍了环境与发展的国际公约，强调了和平、发展、环境保护及尊重人权和基本自由的不可分性。',
+      },
+    ];
 
-  // 使用队列来管理弹幕发送
-  let messageQueue = [];
-  let isProcessingQueue = false;
+    let idx = 0;
 
-  // 修改定期获取消息的函数
-  function updateMessageQueue() {
-      getMessages().then((messagesDict) => {
-          messageQueue = Object.values(messagesDict);
-          // 如果是首次加载且有消息，立即发送几条弹幕
-          if (messageQueue.length > 0 && !initialDanmakusSent) {
-              sendInitialDanmakus();
-          }
-      });
-  }
+    function updateTestimonial() {
+      const { name, text, summary } = testimonials[idx];
 
-  // 添加一个标志来追踪是否已发送初始弹幕
-  let initialDanmakusSent = false;
-
-  // 添加初始弹幕发送函数
-  function sendInitialDanmakus() {
-      initialDanmakusSent = true;
-      // 立即发送3-5条随机弹幕
-      const initialCount = Math.floor(Math.random() * 3) + 3;
-      for (let i = 0; i < initialCount; i++) {
-          setTimeout(() => {
-              if (messageQueue.length > 0) {
-                  const randomIndex = Math.floor(Math.random() * messageQueue.length);
-                  createDanmaku(messageQueue[randomIndex]);
-              }
-          }, i * 500); // 每500ms发送一条
-      }
-  }
-
-  // 页面加载完成后立即获取消息并开始显示弹幕
-  document.addEventListener('DOMContentLoaded', () => {
-      updateMessageQueue(); // 立即获取消息
-  });
-
-  // 修改处理队列中的消息的函数
-  function processMessageQueue() {
-      if (messageQueue.length > 0) {
-          // 移除 isProcessingQueue 检查，允许同时多条弹幕
-          const randomIndex = Math.floor(Math.random() * messageQueue.length);
-          const message = messageQueue[randomIndex];
-          createDanmaku(message);
-      }
-  }
-
-  // 调整定时器间隔
-  setInterval(updateMessageQueue, 5000); // 每5秒更新一次消息队列
-  setInterval(processMessageQueue, 800); // 更频繁地发送弹幕，每800ms检查一次
-
-  // 修改弹幕创建函数中的速度计算
-  function createDanmaku(content) {
-    const danmaku = document.createElement('div');
-    danmaku.className = 'danmaku';
-    danmaku.textContent = content;
-    
-    // 随机垂直位置，确保不同弹幕不会重叠
-    const lanes = 8;
-    const laneHeight = 150 / lanes;
-    const randomLane = Math.floor(Math.random() * lanes);
-    const top = randomLane * laneHeight + 10;
-    danmaku.style.top = `${top}px`;
-    
-    const container = document.getElementById('danmakuContainer');
-    container.appendChild(danmaku);
-    
-    // 调整速度计算
-    const containerWidth = container.offsetWidth;
-    const danmakuWidth = danmaku.offsetWidth;
-    const totalDistance = containerWidth + danmakuWidth + 100;
-    const baseSpeed = 250; // 稍微调整速度
-    const duration = totalDistance / baseSpeed;
-    
-    // 添加随机速度变化
-    const speedVariation = 0.2; // 20%的速度变化
-    const finalDuration = duration * (1 + (Math.random() * 2 - 1) * speedVariation);
-    
-    danmaku.style.animationDuration = `${finalDuration}s`;
-    
-    danmaku.addEventListener('animationend', () => {
-        danmaku.remove();
-    });
-  }
-
-  // 添加显示提示的函数
-  function showToast(message, type = 'success') {
-      const toastContainer = document.getElementById('toastContainer');
-      const toast = document.createElement('div');
-      toast.className = `toast ${type === 'error' ? 'error' : ''}`;
+      document.querySelector('.testimonial').innerHTML = `<a href="${text}" target="_blank">${name}</a><p>${summary}</p>`;
       
-      const icon = type === 'success' ? '✓' : '✕';
-      toast.innerHTML = `
-          <span class="toast-icon">${icon}</span>
-          <span class="toast-message">${message}</span>
-      `;
-      
-      toastContainer.appendChild(toast);
-      
-      // 3秒后移除提示
+      // 重置进度条动画
+      const progressBar = document.querySelector('.progress-bar');
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0';
       setTimeout(() => {
-          toast.addEventListener('animationend', () => {
-              toast.remove();
+        progressBar.style.transition = 'width 10s linear';
+        progressBar.style.width = '100%';
+      }, 50); // 将延迟时减到50毫秒
+
+      idx = (idx + 1) % testimonials.length; // 使用取模运算符简化索引更新
+    }
+
+    setInterval(updateTestimonial, 10000);
+
+    // 添加点击事件监听器
+    document.querySelector('.testimonial-container').addEventListener('click', updateTestimonial);
+
+    updateTestimonial();
+
+      // 提交留言的事件处理函数
+      function handleSubmit() {
+        const content = document.getElementById('content').value;
+        if (content) {
+            uploadMessage(content).then(() => {
+                document.getElementById('content').value = ''; // 清空输入框
+                createDanmaku(content); // 立即显示弹幕
+                showToast('留言发送成功！'); // 显示成功提示
+            }).catch(error => {
+                console.error('提交留言失败:', error);
+                showToast('提交留言失败，请稍后重试', 'error'); // 显示错误提示
+            });
+        } else {
+            showToast('请填写留言内容', 'error'); // 显示错误提示
+        }
+      }
+
+      // 添加弹幕相关函数
+      function createDanmaku(content) {
+        const danmaku = document.createElement('div');
+        danmaku.className = 'danmaku';
+        danmaku.textContent = content;
+        
+        // 随机垂直位置，确保不同弹幕不会重叠
+        const lanes = 8; // 将容器分成8个轨道
+        const laneHeight = 150 / lanes;
+        const randomLane = Math.floor(Math.random() * lanes);
+        const top = randomLane * laneHeight + 10; // 添加一些上边距
+        danmaku.style.top = `${top}px`;
+        
+        const container = document.getElementById('danmakuContainer');
+        container.appendChild(danmaku);
+        
+        // 计算动画持续时间
+        const containerWidth = container.offsetWidth;
+        const danmakuWidth = danmaku.offsetWidth;
+        const totalDistance = containerWidth + danmakuWidth + 100; // 增加一些距离确保完全移出
+        const baseSpeed = 200; // 调整基础速度
+        const duration = totalDistance / baseSpeed;
+        
+        danmaku.style.animationDuration = `${duration}s`;
+        
+        // 动画结束后移除弹幕
+        danmaku.addEventListener('animationend', () => {
+            danmaku.remove();
+        });
+      }
+
+      // 使用队列来管理弹幕发送
+      let messageQueue = [];
+      let isProcessingQueue = false;
+
+      // 修改定期获取消息的函数
+      function updateMessageQueue() {
+          getMessages().then((messagesDict) => {
+              messageQueue = Object.values(messagesDict);
+              // 如果是首次加载且有消息，立即发送几条弹幕
+              if (messageQueue.length > 0 && !initialDanmakusSent) {
+                  sendInitialDanmakus();
+              }
           });
-      }, 3000);
-  }
-</script>
+      }
+
+      // 添加一个标志来追踪是否已发送初始弹幕
+      let initialDanmakusSent = false;
+
+      // 添加初始弹幕发送函数
+      function sendInitialDanmakus() {
+          initialDanmakusSent = true;
+          // 立即发送3-5条随机弹幕
+          const initialCount = Math.floor(Math.random() * 3) + 3;
+          for (let i = 0; i < initialCount; i++) {
+              setTimeout(() => {
+                  if (messageQueue.length > 0) {
+                      const randomIndex = Math.floor(Math.random() * messageQueue.length);
+                      createDanmaku(messageQueue[randomIndex]);
+                  }
+              }, i * 500); // 每500ms发送一条
+          }
+      }
+
+      // 页面加载完成后立即获取消息并开始显示弹幕
+      document.addEventListener('DOMContentLoaded', () => {
+          updateMessageQueue(); // 立即获取消息
+      });
+
+      // 修改处理队列中的消息的函数
+      function processMessageQueue() {
+          if (messageQueue.length > 0) {
+              // 移除 isProcessingQueue 检查，允许同时多条弹幕
+              const randomIndex = Math.floor(Math.random() * messageQueue.length);
+              const message = messageQueue[randomIndex];
+              createDanmaku(message);
+          }
+      }
+
+      // 调整定时器间隔
+      setInterval(updateMessageQueue, 5000); // 每5秒更新一次消息队列
+      setInterval(processMessageQueue, 800); // 更频繁地发送弹幕，每800ms检查一次
+
+      // 修改弹幕创建函数中的速度计算
+      function createDanmaku(content) {
+        const danmaku = document.createElement('div');
+        danmaku.className = 'danmaku';
+        danmaku.textContent = content;
+        
+        // 随机垂直位置，确保不同弹幕不会重叠
+        const lanes = 8;
+        const laneHeight = 150 / lanes;
+        const randomLane = Math.floor(Math.random() * lanes);
+        const top = randomLane * laneHeight + 10;
+        danmaku.style.top = `${top}px`;
+        
+        const container = document.getElementById('danmakuContainer');
+        container.appendChild(danmaku);
+        
+        // 调整速度计算
+        const containerWidth = container.offsetWidth;
+        const danmakuWidth = danmaku.offsetWidth;
+        const totalDistance = containerWidth + danmakuWidth + 100;
+        const baseSpeed = 250; // 稍微调整速度
+        const duration = totalDistance / baseSpeed;
+        
+        // 添加随机速度变化
+        const speedVariation = 0.2; // 20%的速度变化
+        const finalDuration = duration * (1 + (Math.random() * 2 - 1) * speedVariation);
+        
+        danmaku.style.animationDuration = `${finalDuration}s`;
+        
+        danmaku.addEventListener('animationend', () => {
+            danmaku.remove();
+        });
+      }
+
+      // 添加显示提示的函数
+      function showToast(message, type = 'success') {
+          const toastContainer = document.getElementById('toastContainer');
+          const toast = document.createElement('div');
+          toast.className = `toast ${type === 'error' ? 'error' : ''}`;
+          
+          const icon = type === 'success' ? '✓' : '✕';
+          toast.innerHTML = `
+              <span class="toast-icon">${icon}</span>
+              <span class="toast-message">${message}</span>
+          `;
+          
+          toastContainer.appendChild(toast);
+          
+          // 3秒后移除提示
+          setTimeout(() => {
+              toast.addEventListener('animationend', () => {
+                  toast.remove();
+              });
+          }, 3000);
+      }
+    </script>
 </body>
 </html>
