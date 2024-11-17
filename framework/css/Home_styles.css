@@ -97,7 +97,7 @@ nav ul li a:hover span {
 
 
 nav ul li a:hover::before {
-    bottom: 4px; /* 新文字上移显示 */
+    bottom: 4px; /* 字上移显示 */
     opacity: 1; /* 新文字完全不透明 */
 }
 
@@ -350,13 +350,108 @@ margin-left: auto;     明确左边距
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #fff;
 }
 
 .left-slide h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: 56px; /* 从48px增大到56px */
+    margin-bottom: 20px; /* 增加底部间距 */
     margin-top: -30px;
+    font-family: "华文行楷", "楷体", cursive;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    letter-spacing: 6px; /* 增加字间距 */
+    animation: titleFloat 3s ease-in-out infinite;
+    font-weight: bold; /* 加粗 */
+}
+
+.left-slide p {
+    font-size: 28px; /* 从24px增大到28px */
+    font-family: "Times New Roman", serif;
+    opacity: 0.9;
+    letter-spacing: 3px; /* 增加字间距 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-style: italic;
+    animation: subtitleFloat 3s ease-in-out infinite 0.5s;
+    font-weight: 600; /* 稍微加粗 */
+}
+
+/* 添加浮动动画 */
+@keyframes titleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes subtitleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* 当鼠标悬停在文字区域时的效果 */
+.left-slide > div:hover h1 {
+    transform: scale(1.05);
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.left-slide > div:hover p {
+    transform: scale(1.05);
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+/* 为不同主题设置不同的文字颜色和效果 */
+.left-slide > div:nth-child(1) h1 { /* 城市雾霾 */
+    background: linear-gradient(to right, #ffffff, #e0e0e0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.left-slide > div:nth-child(1) p { /* 城市雾霾的英文 */
+    color: #e0e0e0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.left-slide > div:nth-child(2) h1 { /* 工业污染 */
+    background: linear-gradient(to right, #d13636, #cc8800);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+.left-slide > div:nth-child(2) p { /* 工业污染的英文 */
+    color: #cc8800;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.left-slide > div:nth-child(3) h1 { /* 沙滩与海洋 */
+    background: linear-gradient(to right, #0066cc, #0099ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 加深文字阴影 */
+    font-weight: bold; /* 加粗中文 */
+}
+.left-slide > div:nth-child(3) p { /* 沙滩与海洋的英文 */
+    color: #0066cc; /* 使用更深的蓝色 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* 加深文字阴影 */
+    font-weight: bold; /* 加粗英文 */
+}
+
+.left-slide > div:nth-child(4) h1 { /* 丛林 */
+    background: linear-gradient(to right, #006400, #004d00); /* 使用更深的绿色 */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+.left-slide > div:nth-child(4) p { /* 丛林的英文 */
+    color: #006400; /* 使用更深的绿色 */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
 }
 
 .right-slide {
@@ -410,4 +505,17 @@ button:focus {
     transform: translateY(-100%);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+/* 在小屏幕上的响应式调整 */
+@media (max-width: 768px) {
+    .left-slide h1 {
+        font-size: 42px; /* 在小屏幕上适当缩小 */
+        letter-spacing: 4px;
+    }
+    
+    .left-slide p {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
 }
